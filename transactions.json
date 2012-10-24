@@ -1,0 +1,11 @@
+<? require('connect.php') ?>
+<?
+  $result = mysql_query("
+    SELECT amount, balance 
+    FROM om_repo");
+
+  while($row = mysql_fetch_array($result)) {
+    $t = array('amount'=> $row['amount'], 'balance'=> $row['balance']);
+    echo json_encode($t);
+  }
+?>
