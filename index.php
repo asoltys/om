@@ -1,8 +1,14 @@
 <? require('header.php') ?>
   <div class="container-fluid">
     <h1>Login</h1>
+
+    <? if(isset($_SESSION['fail'])) { ?>
+    <div class="fail">Login failed</div>
+    <? } else if(isset($_SESSION['account'])) {
+      header("Location: main.php"); 
+    } ?>
     
-    <form action="main.php" method="post">
+    <form action="login.php" method="post">
       <label for="username">Username</label>
       <input type="text" id="username" name="username" />
 
