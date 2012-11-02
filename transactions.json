@@ -1,11 +1,27 @@
 <? require('connect.php') ?>
 <?
   $result = mysql_query("
-    SELECT amount, balance 
-    FROM om_repo");
+    SELECT amount, balance, created, with_account
+    FROM om_repo
+    WHERE trading_account = '" . mysql_real_escape_string($_GET['trading_account']) . "'
+    ORDER BY created DESC");
 
   while($row = mysql_fetch_array($result)) {
-    $t = array('amount'=> $row['amount'], 'balance'=> $row['balance']);
-    echo json_encode($t);
+    $debit = $credit = '';
+    if ($row['amount'] > 0) {
+      $credit = $row['amount'];
+    } else {
+      $debit = $row['amount'];
+    }
+
+    $t->transactions[] = array(
+      'date'=> $row['created'], 
+      'to'=> $row['with_account'],
+      'credit'=> $credit, 
+      'debit'=> $debit, 
+      'balance'=> $row['balance']
+    );
   }
+
+  echo json_encode($t);
 ?>
