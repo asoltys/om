@@ -1,6 +1,6 @@
 $(function() {
-  $.getJSON('transactions.json',
-    { trading_account: $('#trading_account').val() },
+  $.getJSON('transactions.php',
+    { trading_account: $('#trading_account').val(), currency: $('#currency').val() },
     function(data) {
       $.each(data.transactions, function() {
         var keys = Object.keys(this);
