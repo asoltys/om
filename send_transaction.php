@@ -6,7 +6,8 @@
     SELECT user_id 
     FROM user_member_currencies 
     WHERE account = '" . mysql_escape_string($_POST['with_account']) . "' 
-    AND currency = '" . mysql_escape_string($_SESSION['currency']) . "'";
+    AND currency = '" . mysql_escape_string($_SESSION['currency']) . "'
+    AND account != '" . mysql_escape_string($_SESSION['account']) . "'";
   $result = $db->query($query);
 
   if ($result->num_rows == 0) {
