@@ -1,6 +1,6 @@
 <? require('connect.php') ?>
 <?
-  $result = mysql_query("
+  $result = $db->query("
     SELECT DISTINCT user_member_currencies.account
     FROM account
     JOIN user_member_currencies
@@ -8,11 +8,11 @@
     WHERE account.name = '" . mysql_escape_string($_POST["username"]) . "'
     AND account.password = '" . mysql_escape_string($_POST["password"]) . "'" );
 
-  if (mysql_num_rows($result) == 0) { 
+  if ($result->num_rows == 0) { 
     $_SESSION['fail'] = 1;
     header("Location: index.php");
   } else {
-    $row = mysql_fetch_array($result);
+    $row = $result->fetch_assoc();
     $_SESSION['account'] = $row['account'];
     header("Location: main.php");
   }

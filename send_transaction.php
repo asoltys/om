@@ -80,11 +80,6 @@
     " . mysql_escape_string($_POST['amount']) . " * 2
   );";
 
-  $queries = preg_split("/;+(?=([^'|^\\\']*['|\\\'][^'|^\\\']*['|\\\'])*[^'|^\\\']*[^'|^\\\']$)/", $query); 
-  foreach ($queries as $query) { 
-     if (strlen(trim($query)) > 0 {) mysql_query($query); }
-     echo $query . "<br />";
-  } 
-
-  //header("Location: main.php");
+  $db->multi_query($query);
+  header("Location: main.php");
 ?>
