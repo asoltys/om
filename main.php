@@ -1,6 +1,17 @@
 <? require('header.php') ?>
   <script src="js/report.js"></script>
-  <h1>Open Money</h1>
+
+  <div id="logout">
+    <span><? echo $_SESSION['account'] ?></span>
+    <button>logout</button>
+  </div>
+
+  <h1 style="margin-top: -10px;">open money</h1>
+
+  <? if (isset($_SESSION['flash'])) {
+    echo '<div class="alert alert-error">' . $_SESSION['flash'] . '</div>';
+    unset($_SESSION['flash']);
+  } ?>
 
   <form action="send_transaction.php" method="post">
     <input type="hidden" id="current_account" value="<? echo $_SESSION['account'] ?>" />
@@ -18,30 +29,26 @@
       </select>
     </div>
 
-    <h2>Transactions</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Description</th>
-          <th>To</th>
-          <th>Amount</th>
-          <th>Balance</th>
-        </tr>
-      </thead>
+    <table class="table transactions">
       <tbody>
         <tr>
-            <td><? echo date("j\&\\n\b\s\p;M"); ?></td>
+            <td><input type="text" id="description" name="description" readonly="readonly" value="<? echo date("j\&\\n\b\s\p;M"); ?>" /></td>
             <td><input type="text" id="description" name="description" placeholder="<description>" /></td>
             <td><input type="text" id="with_account" name="with_account" placeholder="<account id>" /></td>
             <td><input type="text" id="amount" name="amount" placeholder="0.00" /></td>
-            <td></td>
+            <td><input type="submit" value="send" /></td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>Date</td>
+          <td>Description</td>
+          <td>To</td>
+          <td>Amount</td>
+          <td>Balance</td>
         </tr>
       </tbody>
     </table>
-
-    <input type="submit" value="GO" />
   </form>
 
-  <a href="logout.php">Logout</a>
 <? require('footer.php') ?>

@@ -1,5 +1,10 @@
 <? require('connect.php') ?>
 <?
+  if (!is_numeric($_POST['amount']) || $_POST['amount'] < 0) {
+    $_SESSION['flash'] = 'Must enter a positive amount';
+    header("Location: main.php");
+  }
+    
   $query = "
   SET @user_id1 = (SELECT user_id 
     FROM user_member_currencies 

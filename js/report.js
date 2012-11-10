@@ -29,21 +29,24 @@ $(function() {
   });
 
   $('#currency').change(function() {
-    $('tbody tr').not(':first').remove();
+    $('tbody:last tr').not(':first').remove();
     $.getJSON('transactions.php',
       { trading_account: $('#account').val(), currency: $('#currency').val() },
       function(data) {
         $.each(data.transactions, function() {
           var keys = Object.keys(this);
           var transaction = this;
-          $('tbody:first').append('<tr><td></td><td></td><td></td><td></td><td></td></tr>')
+          $('table.transactions tbody:last').append('<tr><td></td><td></td><td></td><td></td><td></td></tr>')
 
           $.each(keys, function(i,v) {
-            $('tbody tr:last td:eq(' + i + ')').html(transaction[v]);
+            $('table.transactions tbody tr:last td:eq(' + i + ')').html(transaction[v]);
           });
         });
       }
     );
   });
 
+  $('#logout').click(function() {
+    window.location = 'logout.php';
+  });
 });
