@@ -1,8 +1,5 @@
 <? require('header.php') ?>
   <script src="js/report.js"></script>
-  <style>
-    input { width: 100px; }
-  </style>
   <h1>Open Money</h1>
 
   <form action="send_transaction.php" method="post">
