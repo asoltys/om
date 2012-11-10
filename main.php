@@ -22,7 +22,7 @@
       <tbody>
         <tr>
             <input type="hidden" id="trading_account" value="<? echo $_SESSION['account'] ?>" />
-            <td><? echo date("j M"); ?></td>
+            <td><? echo date("j\&\\n\b\s\p;M"); ?></td>
             <td><input type="text" id="description" name="description" placeholder="<description>" /></td>
             <td><input type="text" id="with_account" name="with_account" placeholder="<account id>" /></td>
             <td><input type="text" id="amount" name="amount" placeholder="0.00" /></td>
