@@ -1,10 +1,11 @@
 body { font-size: 100%; line-height: 100%; margin: 0; padding: 0; }
 	
 div.container-fluid {
-  width: 400px;
+  width: 380px;
   margin-left: auto;
   margin-right: auto;
   text-align:left;
 }
 
+table.table { width: 380px; }
 table.table input { width: 90px; }
