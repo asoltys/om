@@ -1,4 +1,4 @@
     </div>
   </body>
 </html> 
-<?  mysql_close($con); ?>
+<?  $db->close(); ?>
