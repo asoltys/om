@@ -1,9 +1,23 @@
 <? require('connect.php') ?>
 <?
+  $_SESSION['flash'] = "";
+
+  $query = "
+    SELECT user_id 
+    FROM user_member_currencies 
+    WHERE account = '" . mysql_escape_string($_POST['with_account']) . "' 
+    AND currency = '" . mysql_escape_string($_SESSION['currency']) . "'";
+  $result = $db->query($query);
+
+  if ($result->num_rows == 0) {
+    $_SESSION['flash'] .= 'Invalid account name<br />';
+  }
+
   if (!is_numeric($_POST['amount']) || $_POST['amount'] < 0) {
-    $_SESSION['flash'] = 'Must enter a positive amount';
-    header("Location: main.php");
-  } else {
+    $_SESSION['flash'] .= 'Must enter a positive amount<br />';
+  } 
+
+  if ($_SESSION['flash'] == "") {
     $query = "
     SET @user_id1 = (SELECT user_id 
       FROM user_member_currencies 
@@ -85,6 +99,8 @@
     );";
 
     $db->multi_query($query);
-    header("Location: main.php");
+    unset($_SESSION['flash']);
   }
+
+  header("Location: main.php");
 ?>
