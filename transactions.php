@@ -7,6 +7,10 @@
     AND currency = '" . mysql_escape_string($_GET['currency']) . "'
     ORDER BY created DESC");
 
+  $_SESSION['currency'] = $_GET['currency'];
+
+  $t->transactions = array();
+
   while($row = $result->fetch_assoc()) {
     $t->transactions[] = array(
       'date'=> date('j\&\\n\b\s\p;M', strtotime($row['created'])), 

@@ -3,10 +3,20 @@
   <h1>Open Money</h1>
 
   <form action="send_transaction.php" method="post">
-    <label for="currency">Currency</label>
-    <select id="currency" name="currency">
-      <option value="bi~van">bi~van</option>
-    </select>
+    <input type="hidden" id="current_account" value="<? echo $_SESSION['account'] ?>" />
+    <input type="hidden" id="current_currency" value="<? echo $_SESSION['currency'] ?>" />
+
+    <div style="float: left; margin-right: 10px">
+      <label for="account">Account</label>
+      <select id="account" name="account">
+      </select>
+    </div>
+
+    <div>
+      <label for="currency">Currency</label>
+      <select id="currency" name="currency">
+      </select>
+    </div>
 
     <h2>Transactions</h2>
     <table class="table">
@@ -21,19 +31,11 @@
       </thead>
       <tbody>
         <tr>
-            <input type="hidden" id="trading_account" value="<? echo $_SESSION['account'] ?>" />
             <td><? echo date("j\&\\n\b\s\p;M"); ?></td>
             <td><input type="text" id="description" name="description" placeholder="<description>" /></td>
             <td><input type="text" id="with_account" name="with_account" placeholder="<account id>" /></td>
             <td><input type="text" id="amount" name="amount" placeholder="0.00" /></td>
             <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
       </tbody>
     </table>

@@ -1,7 +1,9 @@
 <? require('connect.php') ?>
 <?
   $result = $db->query("
-    SELECT DISTINCT user_member_currencies.account
+    SELECT DISTINCT 
+      user_member_currencies.account, 
+      user_member_currencies.user_id
     FROM account
     JOIN user_member_currencies
     ON user_member_currencies.user_id = account.id
@@ -14,6 +16,7 @@
   } else {
     $row = $result->fetch_assoc();
     $_SESSION['account'] = $row['account'];
+    $_SESSION['user_id'] = $row['user_id'];
     header("Location: main.php");
   }
 ?>
