@@ -68,7 +68,7 @@
       '" . mysql_escape_string($_POST['currency']) . "',
       '" . mysql_escape_string($_POST['description']) . "',
       '" . mysql_escape_string($_POST['with_account']) . "',
-      " . mysql_escape_string($_POST['amount']) . ",
+      -" . mysql_escape_string($_POST['amount']) . ",
       @bal1 - " . mysql_escape_string($_POST['amount']) . ",
       " . mysql_escape_string($_POST['amount']) . " * 2
     );
@@ -94,7 +94,7 @@
       '" . mysql_escape_string($_POST['currency']) . "',
       '" . mysql_escape_string($_POST['description']) . "',
       '" . mysql_escape_string($_SESSION['account']) . "',
-      '" . mysql_escape_string($_POST['amount']) . "',
+      " . mysql_escape_string($_POST['amount']) . ",
       @bal2 + " . mysql_escape_string($_POST['amount']) . ",
       " . mysql_escape_string($_POST['amount']) . " * 2
     );";
