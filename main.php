@@ -43,7 +43,7 @@
         <tr>
           <td>Date</td>
           <td>Description</td>
-          <td>To</td>
+          <td>With</td>
           <td>Amount</td>
           <td>Balance</td>
         </tr>
