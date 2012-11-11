@@ -5,6 +5,17 @@
   $query = "
     SELECT user_id 
     FROM user_member_currencies 
+    WHERE account = '" . mysql_escape_string($_SESSION['account']) . "' 
+    AND currency = '" . mysql_escape_string($_SESSION['currency']) . "'";
+  $result = $db->query($query);
+
+  if ($result->num_rows == 0) {
+    header("Location: logout.php");
+  }
+
+  $query = "
+    SELECT user_id 
+    FROM user_member_currencies 
     WHERE account = '" . mysql_escape_string($_POST['with_account']) . "' 
     AND currency = '" . mysql_escape_string($_SESSION['currency']) . "'
     AND account != '" . mysql_escape_string($_SESSION['account']) . "'";
