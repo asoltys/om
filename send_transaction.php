@@ -40,7 +40,13 @@
       ORDER BY id DESC LIMIT 1)
     ,0));
 
-    SET @bal2 = (SELECT COALESCE((SELECT balance FROM om_repo WHERE trading_account = '" . mysql_escape_string($_SESSION['account']) . "' AND currency = '" . mysql_escape_string($_POST['currency']) . "' ORDER BY id DESC LIMIT 1),0));
+    SET @bal2 = (SELECT COALESCE((
+      SELECT balance 
+      FROM om_repo 
+      WHERE trading_account = '" . mysql_escape_string($_POST['with_account']) . "' 
+      AND currency = '" . mysql_escape_string($_POST['currency']) . "' 
+      ORDER BY id DESC LIMIT 1)
+    ,0));
 
     SET @transaction_id = (SELECT COALESCE((SELECT CAST(MAX(transaction_id) AS SIGNED) + 1 FROM om_repo WHERE transaction_id LIKE '23__________'), 230000000000));
 
