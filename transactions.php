@@ -16,7 +16,7 @@
       'date'=> date('j\&\\n\b\s\p;M', strtotime($row['created'])), 
       'description'=> $row['description'],
       'to'=> $row['with_account'],
-      'amount'=> -$row['amount'], 
+      'amount'=> $row['amount'], 
       'balance'=> $row['balance']
     );
   }
