@@ -77,11 +77,7 @@
 
     SET @transaction_id = (SELECT COALESCE((SELECT CAST(MAX(transaction_id) AS SIGNED) + 1 FROM om_repo WHERE transaction_id LIKE '23__________'), 230000000000));
 
-    SET @id1 = (SELECT MAX(id) + 1 FROM om_repo);
-    SET @id2 = (SELECT MAX(id) + 2 FROM om_repo);
-
     INSERT INTO om_repo (
-      id,
       transaction_id, 
       user_id, 
       created, 
@@ -93,7 +89,6 @@
       balance,
       trading
     ) VALUES (
-      @id1,
       @transaction_id,
       @user_id1,
       NOW(),
@@ -107,7 +102,6 @@
     );
 
     INSERT INTO om_repo (
-      id,
       transaction_id, 
       user_id, 
       created, 
@@ -119,7 +113,6 @@
       balance,
       trading
     ) VALUES (
-      @id2,
       @transaction_id,
       @user_id2,
       NOW(),
