@@ -36,12 +36,7 @@
         AND currency = @currency 
         AND id <  " . $row['id'] . "
         ORDER BY id DESC LIMIT 1)
-      ,0)) + 
-      IF @transaction_id LIKE '%-r'
-        -abs(amount)
-      ELSE
-        abs(amount)
-      END IF;
+      ,0)) + SELECT IF(@transaction_id LIKE '%-r', -abs(amount), abs(amount));
 
       UPDATE om_repo SET 
         balance = @balance, 
