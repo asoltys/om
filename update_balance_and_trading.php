@@ -1,18 +1,15 @@
 <? require('connect.php') ?>
 <?
-  $query = "
-    SELECT id FROM om_repo WHERE id > (SELECT max(id)
-    FROM om_repo 
-    WHERE flags = 'm')";
+  $query = "SELECT id FROM om_repo";
 
   $db->real_query($query);
   $result = $db->store_result();
   if ($result) {
     while($row = $result->fetch_assoc()) {
       $query = "
-      SELECT trading_account, currency 
+      SELECT trading_account, currency, amount 
       FROM om_repo WHERE id = " . $row['id'] . " 
-      INTO @trading_account, @currency;
+      INTO @trading_account, @currency, @amount;
       
       SET @balance = (SELECT COALESCE((
         SELECT balance 
@@ -21,7 +18,7 @@
         AND currency = @currency
         AND id <  " . $row['id'] . "
         ORDER BY id DESC LIMIT 1)
-      ,0));
+      ,0)) + @amount;
 
       SET @trading = (SELECT COALESCE((
         SELECT trading 
@@ -30,7 +27,7 @@
         AND currency = @currency 
         AND id <  " . $row['id'] . "
         ORDER BY id DESC LIMIT 1)
-      ,0));
+      ,0)) + abs(@amount);
 
       UPDATE om_repo SET 
         balance = @balance, 
