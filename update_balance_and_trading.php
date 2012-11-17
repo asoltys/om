@@ -1,6 +1,13 @@
 <? require('connect.php') ?>
 <?
-  $query = "SELECT id FROM om_repo";
+  if ($_GET['all']) {
+    $query = "SELECT id FROM om_repo";
+  } else {
+    $query = "
+      SELECT id FROM om_repo WHERE id > (SELECT max(id)
+      FROM om_repo 
+      WHERE flags = 'm')";
+  }
 
   $db->real_query($query);
   $result = $db->store_result();
@@ -38,7 +45,8 @@
 
       UPDATE om_repo SET 
         balance = @balance, 
-        trading = @trading
+        trading = @trading,
+        flags = 'm'
       WHERE id = " . $row['id'] . ";";
       
       echo "Updated record #" . $row['id'] . "<br />";
