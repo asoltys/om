@@ -5,8 +5,9 @@
   $db->real_query($query);
   $result = $db->store_result();
   if ($result) {
+    $query = "";
     while($row = $result->fetch_assoc()) {
-      $query = "
+      $query .= "
       SELECT trading_account, currency, amount 
       FROM om_repo WHERE id = " . $row['id'] . " 
       INTO @trading_account, @currency, @amount;
@@ -33,9 +34,9 @@
         balance = @balance, 
         trading = @trading
       WHERE id = " . $row['id'] . ";";
+      
       echo "Updated record #" . $row['id'] . "<br />";
-
-      $db->multi_query($query);
     }
+    $db->multi_query($query);
   }
 ?>
