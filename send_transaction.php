@@ -86,6 +86,7 @@
       description,
       with_account,
       amount,
+      flags,
       balance,
       trading
     ) VALUES (
@@ -97,6 +98,7 @@
       '" . mysql_escape_string($_POST['description']) . "',
       '" . mysql_escape_string($_POST['with_account']) . "',
       -" . mysql_escape_string($_POST['amount']) . ",
+     'm', 
       @bal1 - " . mysql_escape_string($_POST['amount']) . ",
       @trading1 + " . mysql_escape_string($_POST['amount']) . "
     );
@@ -110,6 +112,7 @@
       description,
       with_account,
       amount,
+      flags,
       balance,
       trading
     ) VALUES (
@@ -121,6 +124,7 @@
       '" . mysql_escape_string($_POST['description']) . "',
       '" . mysql_escape_string($_SESSION['account']) . "',
       " . mysql_escape_string($_POST['amount']) . ",
+     'm', 
       @bal2 + " . mysql_escape_string($_POST['amount']) . ",
       @trading2 + " . mysql_escape_string($_POST['amount']) . "
     );";
