@@ -3,7 +3,7 @@
   $query = "
     SELECT id FROM om_repo WHERE id > (SELECT max(id)
     FROM om_repo 
-    WHERE falgs = 'm')";
+    WHERE flags = 'm')";
 
   $db->real_query($query);
   $result = $db->store_result();
