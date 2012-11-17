@@ -8,9 +8,10 @@
     $query = "";
     while($row = $result->fetch_assoc()) {
       $query .= "
-      SELECT trading_account, currency, amount 
+      SELECT trading_account, currency, amount, transaction_id 
       FROM om_repo WHERE id = " . $row['id'] . " 
-      INTO @trading_account, @currency, @amount;
+      INTO @trading_account, @currency, @amount, @transaction_id;
+
       
       SET @balance = (SELECT COALESCE((
         SELECT balance 
@@ -28,7 +29,12 @@
         AND currency = @currency 
         AND id <  " . $row['id'] . "
         ORDER BY id DESC LIMIT 1)
-      ,0)) + abs(@amount);
+      ,0)) + 
+      IF @transaction_id LIKE '%-r'
+        -abs(amount)
+      ELSE
+        abs(amount)
+      END IF;
 
       UPDATE om_repo SET 
         balance = @balance, 
