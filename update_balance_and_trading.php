@@ -47,9 +47,8 @@
         trading = @trading,
         flags = 'm'
       WHERE id = " . $row['id'] . ";";
-      
-      echo "Updated record #" . $row['id'] . "<br />";
+      $db->multi_query($query);
     }
-    $db->multi_query($query);
+    echo $query;
   }
 ?>
