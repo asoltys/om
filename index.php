@@ -21,5 +21,6 @@
 
       <input type="submit" value="Login" />
     </form>
+    <a href="http://openmoney.ca/om.cgi?p=requestLoginInfo">Forgot Password</a>
   </div>
 <? require('header.php') ?>
