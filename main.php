@@ -2,8 +2,9 @@
   <script src="js/report.js"></script>
 
   <div id="logout">
-    <span><? echo $_SESSION['account'] ?></span>
-    <button>logout</button>
+    <span><? echo $_SESSION['account'] ?></span> |
+    <a href="http://openmoney.ca/om.cgi">Settings</a> |
+    <a href="logout.php">Logout</a>
   </div>
 
   <h1 style="margin-top: -10px;">open money</h1>
