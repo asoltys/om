@@ -5,7 +5,7 @@
     FROM om_repo 
     WHERE trading_account = '" . mysql_escape_string($_GET['trading_account']) . "'
     AND currency = '" . mysql_escape_string($_GET['currency']) . "'
-    ORDER BY created DESC");
+    ORDER BY id DESC");
 
   $_SESSION['currency'] = $_GET['currency'];
 
