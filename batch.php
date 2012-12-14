@@ -25,13 +25,14 @@
   var i = 0;
 
   $(function() {
-    go();
+    if (i < ids.length)
+      go();
   });
 
   function go() {
     $.get('update_balance_and_trading.php', { id: ids[i] }, function() {
-      i++;
       $('body').append(ids[i] + "<br>");
+      i++;
       if (i < ids.length)
         go();
     });
